@@ -8,6 +8,8 @@
 
 Streaming highlighting with Shiki. Useful for highlighting text streams like LLM outputs.
 
+[Live Demo](https://shiki-stream.netlify.app/)
+
 > [!IMPORTANT]
 > API Unstable. Pin your version on use.
 
