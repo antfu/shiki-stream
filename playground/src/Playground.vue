@@ -18,6 +18,7 @@ const defaultOptions = {
   lang: 'vue',
   interval: 90,
   code: vueBefore,
+  allowRecalls: true,
   rendererType: 'vue' as RendererType,
 }
 
@@ -28,6 +29,7 @@ const {
   lang,
   code,
   interval,
+  allowRecalls,
   rendererType,
 } = toRefs(options)
 
@@ -79,7 +81,7 @@ function rendererUpdate() {
       highlighter: highlighter.value,
       lang: lang.value,
       theme: theme.value,
-      allowRecalls: true,
+      allowRecalls: allowRecalls.value,
     }))
 
   const payload: RendererUpdatePayload = {
@@ -149,7 +151,7 @@ function rerun() {
 let timer: ReturnType<typeof setTimeout> | undefined
 
 watch(
-  [theme, lang, code, interval, rendererContainer, highlighter, loadingPromise],
+  [theme, lang, code, interval, allowRecalls, rendererContainer, highlighter, loadingPromise],
   (n, o) => {
     if (n.every((v, i) => v === o[i]))
       return
@@ -234,6 +236,13 @@ watch(
               type="range" min="1" max="2000"
               class="w-40"
             >
+          </label>
+          <label class="text-sm flex items-center gap-1">
+            <input
+              v-model="allowRecalls"
+              type="checkbox"
+            >
+            Allow Recalls
           </label>
           <button class="border border-gray:20 rounded px3 py1" @click="resetOptions">
             Reset Options
