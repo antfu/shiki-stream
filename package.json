@@ -34,7 +34,7 @@
     "release": "bumpp && pnpm publish",
     "start": "tsx src/index.ts",
     "test": "vitest",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "vue-tsc --noEmit",
     "prepare": "simple-git-hooks"
   },
   "peerDependencies": {
@@ -74,7 +74,8 @@
     "typescript": "catalog:",
     "unbuild": "catalog:",
     "vite": "catalog:",
-    "vitest": "catalog:"
+    "vitest": "catalog:",
+    "vue-tsc": "^2.2.2"
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"

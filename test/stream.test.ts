@@ -42,11 +42,15 @@ it('stream transformer', async () => {
     ))
 
   const tokens: ThemedToken[] = []
-  for await (const token of tokensStream) {
-    if ('recall' in token)
-      tokens.splice(-token.recall, token.recall)
+  const reader = tokensStream.getReader()
+  while (true) {
+    const { done, value } = await reader.read()
+    if (done)
+      break
+    if ('recall' in value)
+      tokens.splice(-value.recall, value.recall)
     else
-      tokens.push(token)
+      tokens.push(value)
   }
   const html = tokensToHtml(tokens)
   await expect(html)
