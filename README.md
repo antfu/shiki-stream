@@ -34,10 +34,50 @@ const tokensStream = textStream
     lang: 'javascript',
     theme: 'nord'
   }))
+```
 
-// Consume the token stream
+### Consume the token stream
+
+#### Manually
+
+```ts
 for await (const token of tokensStream) {
   console.log(token)
+}
+```
+
+Or
+
+```ts
+tokensStream.pipeTo(new WritableStream({
+  async write(token) {
+    console.log(token)
+  }
+}))
+```
+
+#### Vue
+
+```vue
+<script setup lang="ts">
+import { ShikiStreamRenderer } from 'shiki-stream/vue'
+
+// get the token stream
+</script>
+
+<template>
+  <ShikiStreamRenderer :stream="tokensStream" />
+</template>
+```
+
+#### React
+
+```tsx
+import { ShikiStreamRenderer } from 'shiki-stream/react'
+
+export function MyComponent() {
+  // get the token stream
+  return <ShikiStreamRenderer stream={tokensStream} />
 }
 ```
 
