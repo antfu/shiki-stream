@@ -77,7 +77,7 @@
     "unbuild": "catalog:",
     "vite": "catalog:",
     "vitest": "catalog:",
-    "vue-tsc": "^2.2.2"
+    "vue-tsc": "catalog:"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
