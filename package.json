@@ -35,7 +35,9 @@
     "start": "tsx src/index.ts",
     "test": "vitest",
     "typecheck": "vue-tsc --noEmit",
-    "prepare": "simple-git-hooks"
+    "prepare": "simple-git-hooks",
+    "play": "nr -C playground dev",
+    "play:build": "nr -C playground build"
   },
   "peerDependencies": {
     "react": "^19.0.0",
@@ -76,6 +78,11 @@
     "vite": "catalog:",
     "vitest": "catalog:",
     "vue-tsc": "^2.2.2"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "@swc/core"
+    ]
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"

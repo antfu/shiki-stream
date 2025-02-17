@@ -1,12 +1,12 @@
 import type { ThemedToken } from '@shikijs/types'
 import { getTokenStyleObject, stringifyTokenStyle } from '@shikijs/core'
 
-export function generateRandomTextStream(text: string): ReadableStream<string> {
+export function generateRandomTextStream(text: string, inverval = 50): ReadableStream<string> {
   return new ReadableStream<string>({
     async start(controller) {
       let index = 0
       while (index < text.length) {
-        await new Promise(r => setTimeout(r, 100))
+        await new Promise(r => setTimeout(r, inverval))
         const length = Math.round(Math.random() * 20 + 5)
         const chunk = text.slice(index, index + length)
         index += length

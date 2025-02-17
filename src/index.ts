@@ -1,6 +1,6 @@
-import type { CodeToTokensWithThemesOptions, GrammarState, HighlighterCore, HighlighterGeneric, ThemedToken } from '@shikijs/core'
+import type { CodeToTokensOptions, GrammarState, HighlighterCore, HighlighterGeneric, ThemedToken } from '@shikijs/core'
 
-export interface ShikiStreamTokenizerOptions extends CodeToTokensWithThemesOptions<string, string> {
+export type ShikiStreamTokenizerOptions = CodeToTokensOptions<string, string> & {
   highlighter: HighlighterCore | HighlighterGeneric<any, any>
 }
 
@@ -93,7 +93,7 @@ export interface RecallToken {
   recall: number
 }
 
-export interface CodeToTokenTransformStreamOptions extends ShikiStreamTokenizerOptions {
+export type CodeToTokenTransformStreamOptions = ShikiStreamTokenizerOptions & {
   /**
    * Whether to allow recall tokens to be emitted.
    *
