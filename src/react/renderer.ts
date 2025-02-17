@@ -35,6 +35,7 @@ export function ShikiStreamRenderer(
       },
       close: () => onStreamEnd?.(),
     }))
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stream])
 
   return h(

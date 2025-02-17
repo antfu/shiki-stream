@@ -56,7 +56,7 @@ tokensStream.pipeTo(new WritableStream({
   async write(token) {
     if ('recall' in token) {
       // discard the last `token.recall` tokens
-      receivedTokens.length = receivedTokens.length - token.recall
+      receivedTokens.length -= token.recall
     }
     else {
       receivedTokens.push(token)

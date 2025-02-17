@@ -98,22 +98,27 @@ export type CodeToTokenTransformStreamOptions = ShikiStreamTokenizerOptions & {
    * Whether to allow recall tokens to be emitted.
    *
    * A recall token is a token that indicates the number of tokens to be removed from the end.
+   *
+   * @default false
    */
   allowRecalls?: boolean
 }
 
 export class CodeToTokenTransformStream extends TransformStream<string, ThemedToken | RecallToken> {
+  readonly tokenizer: ShikiStreamTokenizer
+  readonly options: CodeToTokenTransformStreamOptions
+
   constructor(
     options: CodeToTokenTransformStreamOptions,
   ) {
-    const streamer = new ShikiStreamTokenizer(options)
+    const tokenizer = new ShikiStreamTokenizer(options)
     const {
       allowRecalls = false,
     } = options
 
     super({
       async transform(chunk, controller) {
-        const { stable, buffer, recall } = streamer.enqueue(chunk)
+        const { stable, buffer, recall } = tokenizer.enqueue(chunk)
         if (allowRecalls && recall > 0) {
           controller.enqueue({ recall } as any)
         }
@@ -127,7 +132,7 @@ export class CodeToTokenTransformStream extends TransformStream<string, ThemedTo
         }
       },
       async flush(controller) {
-        const { tokens } = streamer.close()
+        const { tokens } = tokenizer.close()
         // if allow recalls, the tokens should already be sent
         if (!allowRecalls) {
           for (const token of tokens) {
@@ -136,5 +141,8 @@ export class CodeToTokenTransformStream extends TransformStream<string, ThemedTo
         }
       },
     })
+
+    this.tokenizer = tokenizer
+    this.options = options
   }
 }

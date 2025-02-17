@@ -38,6 +38,7 @@ it('stream transformer', async () => {
           dark: 'vitesse-dark',
           light: 'vitesse-light',
         },
+        allowRecalls: true,
       },
     ))
 

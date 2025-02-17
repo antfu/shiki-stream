@@ -29,7 +29,7 @@ export const ShikiStreamRenderer = defineComponent({
               emit('stream-start')
             }
             if ('recall' in token)
-              tokens.splice(-token.recall, token.recall)
+              tokens.length -= token.recall
             else
               tokens.push(token)
           },
