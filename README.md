@@ -34,21 +34,40 @@ const tokensStream = textStream
   .pipeThrough(new CodeToTokenTransformStream({
     highlighter,
     lang: 'javascript',
-    theme: 'nord'
+    theme: 'nord',
+    allowRecalls: true, // see explanation below
   }))
 ```
 
-### Consume the token stream
+#### `allowRecalls`
 
-#### Manually
+Due fact that the highlighting might be changed based on the context of the code, the themed tokens might be changed as the stream goes on. Because the streams are one-directional, we introduce a special "recall" token to notify the receiver to discard the last tokens that has changed.
+
+By default, `CodeToTokenTransformStream` only returns stable tokens, no recalls. This also means the tokens are outputted less fine-grained, usually line-by-line.
+
+For stream consumers that can handle recalls (e.g. our Vue / React components), you can set `allowRecalls: true` to get more fine-grained tokens.
+
+Typically, recalls should be handled like:
 
 ```ts
-for await (const token of tokensStream) {
-  console.log(token)
-}
+const receivedTokens: ThemedToken[] = []
+
+tokensStream.pipeTo(new WritableStream({
+  async write(token) {
+    if ('recall' in token) {
+      // discard the last `token.recall` tokens
+      receivedTokens.length = receivedTokens.length - token.recall
+    }
+    else {
+      receivedTokens.push(token)
+    }
+  }
+}))
 ```
 
-Or
+### Consume the Token Stream
+
+#### Manually
 
 ```ts
 tokensStream.pipeTo(new WritableStream({
@@ -56,6 +75,14 @@ tokensStream.pipeTo(new WritableStream({
     console.log(token)
   }
 }))
+```
+
+Or in Node.js
+
+```ts
+for await (const token of tokensStream) {
+  console.log(token)
+}
 ```
 
 #### Vue
