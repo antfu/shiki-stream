@@ -44,8 +44,8 @@ it('exported', async () => {
 
   let index = 0
   for (const slice of slices) {
-    const { stable, buffer } = streamer.enqueue(slice)
-    await expect.soft(tokensToHtml([...stable, ...buffer]))
+    const { stable, unstable } = await streamer.enqueue(slice)
+    await expect.soft(tokensToHtml([...stable, ...unstable]))
       .toMatchFileSnapshot(`output/slice-${index++}.html`)
   }
   streamer.close()

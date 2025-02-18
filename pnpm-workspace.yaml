@@ -13,7 +13,6 @@ catalog:
   '@shikijs/engine-javascript': ^2.4.2
   '@shikijs/langs': ^2.4.2
   '@shikijs/themes': ^2.4.2
-  '@shikijs/types': ^2.4.2
   '@types/node': ^22.13.4
   '@types/react': ^19.0.10
   '@types/react-dom': ^19.0.4

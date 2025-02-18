@@ -52,8 +52,7 @@
     }
   },
   "dependencies": {
-    "@shikijs/core": "catalog:",
-    "@shikijs/types": "catalog:"
+    "@shikijs/core": "catalog:"
   },
   "devDependencies": {
     "@antfu/eslint-config": "catalog:",

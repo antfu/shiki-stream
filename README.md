@@ -10,10 +10,9 @@ Streaming highlighting with Shiki. Useful for highlighting text streams like LLM
 
 [Live Demo](https://shiki-stream.netlify.app/)
 
-> [!IMPORTANT]
-> API Unstable. Pin your version on use.
-
 ## Usage
+
+Create a transform stream with `CodeToTokenTransformStream` and `.pipeThrough` your text stream:
 
 ```ts
 import { createHighlighter, createJavaScriptRegexEngine } from 'shiki'

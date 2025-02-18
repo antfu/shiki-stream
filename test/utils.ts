@@ -1,4 +1,4 @@
-import type { ThemedToken } from '@shikijs/types'
+import type { ThemedToken } from '@shikijs/core'
 import { getTokenStyleObject, stringifyTokenStyle } from '@shikijs/core'
 
 export function generateRandomTextStream(text: string, inverval = 50): ReadableStream<string> {

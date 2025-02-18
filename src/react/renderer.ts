@@ -1,4 +1,4 @@
-import type { ThemedToken } from '@shikijs/types'
+import type { ThemedToken } from '@shikijs/core'
 import type { JSX } from 'react'
 import type { RecallToken } from '..'
 import { objectId } from '@antfu/utils'
