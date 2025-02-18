@@ -52,7 +52,7 @@
     }
   },
   "dependencies": {
-    "@shikijs/core": "catalog:"
+    "@shikijs/core": "^2.4.0 || ^3.0.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "catalog:",
@@ -71,6 +71,7 @@
     "react": "catalog:",
     "shiki": "catalog:",
     "simple-git-hooks": "catalog:",
+    "taze": "^18.6.0",
     "tsx": "catalog:",
     "typescript": "catalog:",
     "unbuild": "catalog:",
