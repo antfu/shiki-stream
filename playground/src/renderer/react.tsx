@@ -16,11 +16,10 @@ export const createRendererReact: RendererFactory = (options): RendererFactoryRe
   })
 
   function App(): JSX.Element {
-    // TODO: make React not render twice
     const [count, setCounter] = React.useState(0)
 
     React.useEffect(() => {
-      watch(props, () => {
+      return watch(props, () => {
         // Force React to re-render
         setCounter(c => c + 1)
       })
@@ -28,7 +27,29 @@ export const createRendererReact: RendererFactory = (options): RendererFactoryRe
 
     console.log('React rendering', count)
 
-    return <ShikiStreamRenderer {...props} className={props.class} />
+    const [i, setI] = React.useState(0)
+
+    React.useEffect(() => {
+      const timerId = setInterval(() => {
+        setI(i => i + 1)
+      }, 1_000)
+      return () => clearInterval(timerId)
+    }, [])
+
+    return (
+      <ShikiStreamRenderer
+        {...props}
+        onStreamStart={() => {
+          console.log('onStreamStart', i)
+          props.onStreamStart?.()
+        }}
+        onStreamEnd={() => {
+          console.log('onStreamEnd', i)
+          props.onStreamEnd?.()
+        }}
+        className={props.class}
+      />
+    )
   }
 
   return {
