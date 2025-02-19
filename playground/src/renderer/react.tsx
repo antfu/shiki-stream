@@ -16,11 +16,10 @@ export const createRendererReact: RendererFactory = (options): RendererFactoryRe
   })
 
   function App(): JSX.Element {
-    // TODO: make React not render twice
     const [count, setCounter] = React.useState(0)
 
     React.useEffect(() => {
-      watch(props, () => {
+      return watch(props, () => {
         // Force React to re-render
         setCounter(c => c + 1)
       })
