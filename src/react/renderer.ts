@@ -4,6 +4,7 @@ import type { RecallToken } from '..'
 import { objectId } from '@antfu/utils'
 import { getTokenStyleObject } from '@shikijs/core'
 import { createElement as h, useEffect, useState } from 'react'
+import { useEffectEvent } from './utils'
 
 export function ShikiStreamRenderer(
   {
@@ -18,25 +19,26 @@ export function ShikiStreamRenderer(
 ): JSX.Element {
   const [tokens, setTokens] = useState<ThemedToken[]>([])
 
+  const _onStreamStart = useEffectEvent(() => onStreamStart?.())
+  const _onStreamEnd = useEffectEvent(() => onStreamEnd?.())
+
   useEffect(() => {
-    if (tokens.length)
-      setTokens([])
+    setTokens(prevTokens => prevTokens.length ? [] : prevTokens)
     let started = false
     stream.pipeTo(new WritableStream({
       write(token) {
         if (!started) {
           started = true
-          onStreamStart?.()
+          _onStreamStart()
         }
         if ('recall' in token)
           setTokens(tokens => tokens.slice(0, -token.recall))
         else
           setTokens(tokens => [...tokens, token])
       },
-      close: () => onStreamEnd?.(),
+      close: () => _onStreamEnd(),
     }))
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [stream])
+  }, [_onStreamEnd, _onStreamStart, stream])
 
   return h(
     'pre',
