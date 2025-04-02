@@ -109,6 +109,49 @@ export function MyComponent() {
 }
 ```
 
+## Cached Renderer
+
+This library also provides a simpfiled renderer API to render incrementally updated code string.
+
+> [!NOTE]
+> Experimental
+
+### Vue
+
+```vue
+<script setup lang="ts">
+import { ShikiCachedRenderer } from 'shiki-stream/vue'
+
+const highlighter = await createHighlighter({
+  langs: [/* ... */],
+  themes: [/* ... */],
+  engine: createJavaScriptRegexEngine()
+})
+
+const code = ref('') // code should only be updated incrementally
+
+// for demo purposes
+onMounted(() => {
+  setInterval(() => {
+    code.value += '\nconsole.log("Hello, world!");'
+  }, 1000)
+})
+</script>
+
+<template>
+  <ShikiCachedRenderer
+    :highlighter="highlighter"
+    :code="code"
+    lang="js"
+    theme="vitesse-light"
+  />
+</template>
+```
+
+### React
+
+TODO:
+
 ## Sponsors
 
 <p align="center">
