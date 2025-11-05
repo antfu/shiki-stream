@@ -16,14 +16,27 @@ export const ShikiStreamRenderer = defineComponent({
   emits: ['stream-start', 'stream-end'],
   setup(props, { emit }) {
     const tokens = reactive<ThemedToken[]>([])
+    let currentAbortController: AbortController | null = null
 
     watch(
       () => props.stream,
-      () => {
+      (newStream) => {
         tokens.length = 0
+
+        if (currentAbortController) {
+          currentAbortController.abort()
+        }
+
+        currentAbortController = new AbortController()
+        const signal = currentAbortController.signal
         let started = false
-        props.stream.pipeTo(new WritableStream({
+
+        newStream.pipeTo(new WritableStream({
           write(token) {
+            if (signal.aborted) {
+              return
+            }
+
             if (!started) {
               started = true
               emit('stream-start')
@@ -33,8 +46,21 @@ export const ShikiStreamRenderer = defineComponent({
             else
               tokens.push(token)
           },
-          close: () => emit('stream-end'),
-        }))
+          close: () => {
+            if (!signal.aborted) {
+              emit('stream-end')
+            }
+          },
+          abort: () => {
+            if (!signal.aborted) {
+              emit('stream-end')
+            }
+          },
+        }), { signal }).catch((error) => {
+          if (error.name !== 'AbortError') {
+            console.error('Stream error:', error)
+          }
+        })
       },
       { immediate: true },
     )
