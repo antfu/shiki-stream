@@ -2,7 +2,7 @@
   "name": "shiki-stream",
   "type": "module",
   "version": "0.1.2",
-  "packageManager": "pnpm@10.7.1",
+  "packageManager": "pnpm@10.20.0",
   "description": "Streaming colorization for Shiki",
   "author": "Anthony Fu <anthonyfu117@hotmail.com>",
   "license": "MIT",
@@ -52,7 +52,7 @@
     }
   },
   "dependencies": {
-    "@shikijs/core": "^2.4.0 || ^3.0.0"
+    "@shikijs/core": "catalog:"
   },
   "devDependencies": {
     "@antfu/eslint-config": "catalog:",
@@ -66,26 +66,19 @@
     "@types/react": "catalog:",
     "bumpp": "catalog:",
     "eslint": "catalog:",
-    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-hooks": "catalog:",
     "lint-staged": "catalog:",
     "pnpm": "catalog:",
     "react": "catalog:",
     "shiki": "catalog:",
     "simple-git-hooks": "catalog:",
-    "taze": "^19.0.4",
+    "taze": "catalog:",
     "tsx": "catalog:",
     "typescript": "catalog:",
     "unbuild": "catalog:",
     "vite": "catalog:",
     "vitest": "catalog:",
     "vue-tsc": "catalog:"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "@swc/core",
-      "esbuild",
-      "simple-git-hooks"
-    ]
   },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"
