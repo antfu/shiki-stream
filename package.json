@@ -31,7 +31,7 @@
     "dev": "unbuild --stub",
     "lint": "eslint .",
     "prepublishOnly": "nr build",
-    "release": "bumpp && pnpm publish",
+    "release": "bumpp",
     "start": "tsx src/index.ts",
     "test": "vitest",
     "typecheck": "vue-tsc --noEmit",
