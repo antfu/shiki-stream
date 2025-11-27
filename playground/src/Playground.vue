@@ -11,6 +11,7 @@ import { CodeToTokenTransformStream } from '../../src'
 import { generateRandomTextStream } from '../../test/utils'
 import { vueAfter, vueBefore } from './fixture'
 import { createRendererReact } from './renderer/react'
+import { createRendererSolid } from './renderer/solid'
 import { createRendererVue } from './renderer/vue'
 
 const defaultOptions = {
@@ -96,9 +97,9 @@ function rendererUpdate() {
       case 'react':
         renderer = createRendererReact(rendererOptions)
         break
-      // case 'solid':
-      //   renderer = createRendererSolid(rendererOptions)
-      //   break
+      case 'solid':
+        renderer = createRendererSolid(rendererOptions)
+        break
       // case 'svelte':
       //   renderer = createRendererSvelte(rendererOptions)
       //   break
@@ -285,10 +286,10 @@ watch(
             <option value="react">
               React Renderer
             </option>
-            <!-- <option value="solid">
+            <option value="solid">
               Solid Renderer
             </option>
-            <option value="svelte">
+            <!-- <option value="svelte">
               Svelte Renderer
             </option>
             <option value="web-component">

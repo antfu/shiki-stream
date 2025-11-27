@@ -29,6 +29,7 @@ catalog:
   react-dom: ^19.2.0
   shiki: ^3.14.0
   simple-git-hooks: ^2.13.1
+  solid-js: ^1.9.10
   taze: ^19.9.0
   tsx: ^4.20.6
   typescript: ~5.9.3
