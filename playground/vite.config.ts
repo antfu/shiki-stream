@@ -12,6 +12,7 @@ export default defineConfig({
     alias: {
       'shiki-stream/vue': fileURLToPath(new URL('../src/vue/index.ts', import.meta.url)),
       'shiki-stream/react': fileURLToPath(new URL('../src/react/index.ts', import.meta.url)),
+      'shiki-stream/solid': fileURLToPath(new URL('../src/solid/index.ts', import.meta.url)),
       'shiki-stream': fileURLToPath(new URL('../src/index.ts', import.meta.url)),
     },
   },

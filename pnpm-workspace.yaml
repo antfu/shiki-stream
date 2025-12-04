@@ -23,6 +23,7 @@ catalog:
   bumpp: ^10.3.1
   eslint: ^9.39.1
   eslint-plugin-react-hooks: ^7.0.1
+  eslint-plugin-react-refresh: ^0.4.24
   lint-staged: ^16.2.6
   pnpm: ^10.20.0
   react: ^19.2.0

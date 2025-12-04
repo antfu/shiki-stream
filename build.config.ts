@@ -5,6 +5,7 @@ export default defineBuildConfig({
     'src/index',
     'src/vue',
     'src/react',
+    'src/solid',
   ],
   declaration: 'node16',
   clean: true,
