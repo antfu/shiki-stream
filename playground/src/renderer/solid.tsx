@@ -1,8 +1,10 @@
 /* eslint-disable no-console */
 
 /* @jsxImportSource solid-js */
+import type { ThemedToken } from '@shikijs/core'
 import type { JSX } from 'solid-js'
-import type { RendererFactoryOptions, RendererFactoryResult, RendererUpdatePayload } from './types'
+import type { RecallToken } from '../../../src'
+import type { RendererFactoryOptions, RendererFactoryResult } from './types'
 import { createEffect, createSignal } from 'solid-js'
 import { createStore } from 'solid-js/store'
 import { render } from 'solid-js/web'
@@ -10,9 +12,8 @@ import { ShikiStreamRenderer } from '../../../src/solid'
 
 let lastRendererCleanup: (() => void) | undefined
 
-export function createRendererSolid(options: RendererFactoryOptions & RendererUpdatePayload): RendererFactoryResult {
+export function createRendererSolid(options: RendererFactoryOptions): RendererFactoryResult {
   const [props, setProps] = createStore({
-    stream: options.stream ?? null,
     onStreamStart: options.onStart,
     onStreamEnd: options.onEnd,
     class: '',
@@ -26,7 +27,7 @@ export function createRendererSolid(options: RendererFactoryOptions & RendererUp
       lastRendererCleanup = undefined
   }
 
-  function App(): JSX.Element {
+  function App({ stream }: { stream: ReadableStream<ThemedToken | RecallToken> }): JSX.Element {
     const [count, setCount] = createSignal(0)
 
     createEffect(() => {
@@ -36,7 +37,7 @@ export function createRendererSolid(options: RendererFactoryOptions & RendererUp
 
     return (
       <ShikiStreamRenderer
-        stream={props.stream}
+        stream={stream}
         onStreamStart={() => {
           console.log('onStreamStart', count())
           props.onStreamStart?.()
@@ -53,8 +54,7 @@ export function createRendererSolid(options: RendererFactoryOptions & RendererUp
   return {
     mount: (element, payload) => {
       lastRendererCleanup?.()
-      setProps(payload as any)
-      dispose = render(() => <App />, element)
+      dispose = render(() => <App stream={payload.stream} />, element)
       lastRendererCleanup = cleanup
       console.log('Solid renderer mounted')
     },

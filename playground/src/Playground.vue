@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Highlighter } from 'shiki'
+import type { Ref } from 'vue'
 import type { RendererFactoryOptions, RendererFactoryResult, RendererType, RendererUpdatePayload } from './renderer/types'
 import { toRefs, useLocalStorage } from '@vueuse/core'
 import { createHighlighter } from 'shiki'
@@ -23,7 +24,7 @@ const defaultOptions = {
   rendererType: 'vue' as RendererType,
 }
 
-const options = useLocalStorage('shiki-stream-options', defaultOptions, { mergeDefaults: true })
+const options = useLocalStorage('shiki-stream-options', defaultOptions, { mergeDefaults: true }) as Ref<typeof defaultOptions>
 
 const {
   theme,
