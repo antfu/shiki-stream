@@ -86,6 +86,10 @@
     "vitest": "catalog:",
     "vue-tsc": "catalog:"
   },
+  "resolutions": {
+    "chokidar": "^5.0.0",
+    "semver": "^7.7.3"
+  },
   "simple-git-hooks": {
     "pre-commit": "pnpm lint-staged"
   },
