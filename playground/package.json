@@ -18,6 +18,7 @@
     "@vitejs/plugin-vue": "catalog:",
     "@vueuse/core": "catalog:",
     "react-dom": "catalog:",
+    "solid-js": "catalog:",
     "typescript": "catalog:",
     "unocss": "catalog:",
     "vite": "catalog:",

@@ -4,6 +4,7 @@ import React from '@vitejs/plugin-react'
 import Vue from '@vitejs/plugin-vue'
 import UnoCSS from 'unocss/vite'
 import { defineConfig } from 'vite'
+import Solid from 'vite-plugin-solid'
 // import Solid from 'vite-plugin-solid'
 
 export default defineConfig({
@@ -11,6 +12,7 @@ export default defineConfig({
     alias: {
       'shiki-stream/vue': fileURLToPath(new URL('../src/vue/index.ts', import.meta.url)),
       'shiki-stream/react': fileURLToPath(new URL('../src/react/index.ts', import.meta.url)),
+      'shiki-stream/solid': fileURLToPath(new URL('../src/solid/index.ts', import.meta.url)),
       'shiki-stream': fileURLToPath(new URL('../src/index.ts', import.meta.url)),
     },
   },
@@ -18,7 +20,7 @@ export default defineConfig({
     Vue(),
     UnoCSS(),
     // Svelte(),
-    // Solid({ include: ['src/renderer/solid.tsx', '../src/solid/**'] }),
+    Solid({ include: ['src/renderer/solid.tsx', '../src/solid/**'] }),
     React({ include: ['src/renderer/react.tsx', '../src/react/**'] }),
   ],
 })
