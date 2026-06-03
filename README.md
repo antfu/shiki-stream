@@ -10,13 +10,33 @@ Streaming highlighting with Shiki. Useful for highlighting text streams like LLM
 
 [Live Demo](https://shiki-stream.netlify.app/)
 
+> [!IMPORTANT]
+> **This package has moved to [`@shikijs/stream`](https://www.npmjs.com/package/@shikijs/stream).**
+>
+> Starting with **`shiki-stream@4.2.0`**, `shiki-stream` is a thin re-export of `@shikijs/stream` — existing imports keep working without code changes, but **all new code should import from `@shikijs/stream`** directly. Future development and releases will happen there.
+>
+> ```diff
+> - import { CodeToTokenTransformStream } from 'shiki-stream'
+> - import { ShikiStreamRenderer } from 'shiki-stream/vue'
+> - import { ShikiStreamRenderer } from 'shiki-stream/react'
+> - import { ShikiStreamRenderer } from 'shiki-stream/solid'
+> + import { CodeToTokenTransformStream } from '@shikijs/stream'
+> + import { ShikiStreamRenderer } from '@shikijs/stream/vue'
+> + import { ShikiStreamRenderer } from '@shikijs/stream/react'
+> + import { ShikiStreamRenderer } from '@shikijs/stream/solid'
+> ```
+>
+> Docs: <https://shiki.style/packages/stream>
+
 ## Usage
+
+> The snippets below show the new `@shikijs/stream` import paths. If you are still on `shiki-stream`, the same imports work — just swap the package name.
 
 Create a transform stream with `CodeToTokenTransformStream` and `.pipeThrough` your text stream:
 
 ```ts
+import { CodeToTokenTransformStream } from '@shikijs/stream'
 import { createHighlighter, createJavaScriptRegexEngine } from 'shiki'
-import { CodeToTokenTransformStream } from 'shiki-stream'
 
 // Initialize the Shiki highlighter somewhere in your app
 const highlighter = await createHighlighter({
@@ -88,7 +108,7 @@ for await (const token of tokensStream) {
 
 ```vue
 <script setup lang="ts">
-import { ShikiStreamRenderer } from 'shiki-stream/vue'
+import { ShikiStreamRenderer } from '@shikijs/stream/vue'
 
 // get the token stream
 </script>
@@ -101,7 +121,18 @@ import { ShikiStreamRenderer } from 'shiki-stream/vue'
 #### React
 
 ```tsx
-import { ShikiStreamRenderer } from 'shiki-stream/react'
+import { ShikiStreamRenderer } from '@shikijs/stream/react'
+
+export function MyComponent() {
+  // get the token stream
+  return <ShikiStreamRenderer stream={tokensStream} />
+}
+```
+
+#### Solid
+
+```tsx
+import { ShikiStreamRenderer } from '@shikijs/stream/solid'
 
 export function MyComponent() {
   // get the token stream
@@ -120,7 +151,7 @@ This library also provides a simpfiled renderer API to render incrementally upda
 
 ```vue
 <script setup lang="ts">
-import { ShikiCachedRenderer } from 'shiki-stream/vue'
+import { ShikiCachedRenderer } from '@shikijs/stream/vue'
 
 const highlighter = await createHighlighter({
   langs: [/* ... */],

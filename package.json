@@ -1,9 +1,9 @@
 {
   "name": "shiki-stream",
   "type": "module",
-  "version": "0.1.4",
+  "version": "4.2.0",
   "packageManager": "pnpm@10.27.0",
-  "description": "Streaming colorization for Shiki",
+  "description": "Streaming colorization for Shiki. Moved to `@shikijs/stream`; this package re-exports from there.",
   "author": "Anthony Fu <anthonyfu117@hotmail.com>",
   "license": "MIT",
   "funding": "https://github.com/sponsors/antfu",
@@ -28,8 +28,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "unbuild",
-    "dev": "unbuild --stub",
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/build.mjs",
     "lint": "eslint .",
     "prepublishOnly": "nr build",
     "release": "bumpp",
@@ -57,13 +57,13 @@
     }
   },
   "dependencies": {
-    "@shikijs/core": "catalog:"
+    "@shikijs/stream": "catalog:"
   },
   "devDependencies": {
     "@antfu/eslint-config": "catalog:",
     "@antfu/ni": "catalog:",
-    "@antfu/utils": "catalog:",
     "@eslint-react/eslint-plugin": "catalog:",
+    "@shikijs/core": "catalog:",
     "@shikijs/engine-javascript": "catalog:",
     "@shikijs/langs": "catalog:",
     "@shikijs/themes": "catalog:",
@@ -81,7 +81,6 @@
     "taze": "catalog:",
     "tsx": "catalog:",
     "typescript": "catalog:",
-    "unbuild": "catalog:",
     "vite": "catalog:",
     "vitest": "catalog:",
     "vue-tsc": "catalog:"

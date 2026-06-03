@@ -11,12 +11,12 @@ packages:
 catalog:
   '@antfu/eslint-config': ^6.7.3
   '@antfu/ni': ^28.1.0
-  '@antfu/utils': ^9.3.0
   '@eslint-react/eslint-plugin': ^2.5.1
-  '@shikijs/core': ^3.0.0
-  '@shikijs/engine-javascript': ^3.20.0
-  '@shikijs/langs': ^3.20.0
-  '@shikijs/themes': ^3.20.0
+  '@shikijs/core': ^4.2.0
+  '@shikijs/engine-javascript': ^4.2.0
+  '@shikijs/langs': ^4.2.0
+  '@shikijs/stream': ^4.2.0
+  '@shikijs/themes': ^4.2.0
   '@types/node': ^24.10.4
   '@types/react': ^19.2.7
   '@types/react-dom': ^19.2.3
@@ -32,13 +32,12 @@ catalog:
   pnpm: ^10.27.0
   react: ^19.2.3
   react-dom: ^19.2.3
-  shiki: ^3.20.0
+  shiki: ^4.2.0
   simple-git-hooks: ^2.13.1
   solid-js: ^1.9.10
   taze: ^19.9.2
   tsx: ^4.21.0
   typescript: ~5.9.3
-  unbuild: ^3.6.1
   unocss: ^66.5.12
   vite: ^7.3.0
   vite-plugin-solid: ^2.11.10
