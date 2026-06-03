@@ -1,7 +1,7 @@
 {
   "name": "shiki-stream",
   "type": "module",
-  "version": "4.2.0",
+  "version": "0.1.5",
   "packageManager": "pnpm@10.27.0",
   "description": "Streaming colorization for Shiki. Moved to `@shikijs/stream`; this package re-exports from there.",
   "author": "Anthony Fu <anthonyfu117@hotmail.com>",
